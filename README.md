@@ -6,14 +6,34 @@ channels, and [Seerr](https://github.com/seerr-team/seerr) requests right next t
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-orange.svg)](LICENSE)
 
-![Home](screenshots/home.jpg)
+## On your TV
+
+Made for the couch: Android TV / Google TV, driven entirely with the remote.
+
+![Hevyfin on a TV: home](screenshots/tv-home.jpg)
+
+| | |
+|---|---|
+| ![A film's page, with Cinema mode](screenshots/tv-details.jpg)<br><sub>A film's page, with **Cinema mode** for a private screening</sub> | ![Hevyfin Cinema](screenshots/tv-cinema.jpg)<br><sub>**Cinema**: three screenings a day, and marathons</sub> |
+| ![TV channels](screenshots/tv-channels.jpg)<br><sub>**Channels** made from your own library, with a guide</sub> | ![Screensaver](screenshots/tv-screensaver.jpg)<br><sub>The **screensaver**: your library's art and the time</sub> |
+
+Every screening opens like a night at the movies (trailers too, if you have them):
+
+| | | |
+|---|---|---|
+| ![Hevyfin presents](screenshots/tv-presents.jpg) | ![Phones on silent](screenshots/tv-phones.jpg) | ![Feature presentation countdown](screenshots/tv-countdown.jpg) |
+
+## On your computer
+
+![Home in the browser](screenshots/home.jpg)
 
 | | |
 |---|---|
 | ![A title's page](screenshots/details.jpg) | ![Movies](screenshots/movies.jpg) |
 | ![What tonight?](screenshots/tonight.jpg) | |
 
-<sub>Screenshots: the browser version against Jellyfin's public demo server (public-domain films).</sub>
+<sub>All screenshots: Hevyfin signed in to Jellyfin's public demo server (public-domain films), the TV
+app at 1080p and the browser version.</sub>
 
 ## Supported platforms
 

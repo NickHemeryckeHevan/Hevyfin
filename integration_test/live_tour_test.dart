@@ -103,7 +103,7 @@ void main() {
       store.marathons.removeWhere((m) => m.id == id);
       store.prompted.add(id);
       store.marathons.add(
-        Marathon(id, 'Test', DateTime.now(), const [], const [], Timeline('marathon-$id', 'Test', DateTime.now().subtract(const Duration(seconds: 3)), [bumper(kind, dur: const Duration(seconds: 20), title: 'Shrek 2', sub: 'at 21:30')])),
+        Marathon(id, 'Test', DateTime.now(), const [], const [], Timeline('marathon-$id', 'Test', DateTime.now().subtract(const Duration(seconds: 3)), [bumper(kind, dur: const Duration(seconds: 20), title: 'The Late Movie', sub: 'at 21:30')])),
       );
       router.push('/live/marathon/$id');
       await wait(2);
