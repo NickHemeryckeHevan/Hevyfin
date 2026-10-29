@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Hevyfin: films and shows from your Jellyfin server">
+  <meta name="theme-color" content="#0E0E0E">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <title>Hevyfin</title>
+  <script>
+    // The browser version is for computers; phones and tablets get the Android app (/get/),
+    // unless someone asks for the web version anyway (?web=1).
+    (function () {
+      var ua = navigator.userAgent;
+      var handheld = /Android|iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+      if (handheld && !/[?&]web=1\b/.test(location.search)) location.replace('/get/');
+    })();
+  </script>
+  <style>html, body { margin: 0; background: #0e0e0e; }</style>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

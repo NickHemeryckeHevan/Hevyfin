@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Replaced by `flutter build web --base-href`. -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Hevyfin: films and shows from your Jellyfin server">
+  <meta name="theme-color" content="#0E0E0E">
+
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Hevyfin">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>Hevyfin</title>
+  <link rel="manifest" href="manifest.json">
+  <style>
+    html, body { margin: 0; height: 100%; background: #0E0E0E; }
+    #loading { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }
+    #loading img { width: 96px; height: 96px; animation: pulse 1.6s ease-in-out infinite; }
+    @keyframes pulse { 50% { opacity: .45; transform: scale(.94); } }
+  </style>
+</head>
+<body>
+  <div id="loading"><img src="icons/Icon-192.png" alt="Hevyfin"></div>
+  <script>
+    // The web version is for computers. Phones and tablets get the Android app instead
+    // (get/), unless someone asks for the web version anyway (?web=1).
+    (function () {
+      var ua = navigator.userAgent;
+      var handheld = /Android|iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+      var forced = /[?&]web=1\b/.test(location.search);
+      if (handheld && !forced) {
+        location.replace('get/');
+        return;
+      }
+      window.addEventListener('flutter-first-frame', function () {
+        var l = document.getElementById('loading');
+        if (l) l.remove();
+      });
+      var s = document.createElement('script');
+      s.src = 'flutter_bootstrap.js';
+      s.async = true;
+      document.body.appendChild(s);
+    })();
+  </script>
+</body>
+</html>

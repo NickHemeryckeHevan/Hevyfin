@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0E0E0E">
+  <title>Get Hevyfin</title>
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <style>
+    :root { --bg: #0E0E0E; --surface: #181818; --text: #F2F2F2; --dim: #A8A8A8; --orange: #FF6A00; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; background: var(--bg); color: var(--text);
+      font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      display: flex; align-items: center; justify-content: center; padding: 24px 16px;
+    }
+    main { width: 100%; max-width: 420px; text-align: center; }
+    img.logo { width: 96px; height: 96px; }
+    h1 { font-size: 28px; margin: 16px 0 4px; }
+    .lead { color: var(--dim); margin: 0 0 28px; }
+    .btn {
+      display: block; width: 100%; padding: 16px; border-radius: 8px; border: 0;
+      background: linear-gradient(180deg, #FFA640, #FF5A00); color: #111;
+      font-size: 18px; font-weight: 800; text-decoration: none;
+    }
+    .btn[aria-disabled="true"] { opacity: .5; pointer-events: none; }
+    .meta { color: var(--dim); font-size: 14px; margin: 10px 0 28px; min-height: 21px; }
+    ol { text-align: left; background: var(--surface); border-radius: 8px; padding: 16px 16px 16px 36px; margin: 0 0 24px; color: var(--dim); }
+    ol li + li { margin-top: 8px; }
+    ol b { color: var(--text); }
+    .other { color: var(--dim); font-size: 14px; }
+    .other a { color: var(--orange); }
+    .ios { display: none; }
+    body.is-ios .ios { display: block; }
+    body.is-ios .android { display: none; }
+  </style>
+</head>
+<body>
+  <main>
+    <img class="logo" src="../icons/Icon-192.png" alt="">
+    <h1>Hevyfin</h1>
+
+    <div class="android">
+      <p class="lead">On a phone, Hevyfin is an app rather than a website. Download the latest version below.</p>
+      <a id="download" class="btn" href="#" aria-disabled="true">Download for Android</a>
+      <p id="meta" class="meta">Looking for the latest version…</p>
+      <ol>
+        <li>Tap <b>Download for Android</b>.</li>
+        <li>Open the downloaded file. If Android asks, allow your browser to <b>install unknown apps</b>.</li>
+        <li>Tap <b>Install</b> (or <b>Update</b>), then open Hevyfin and sign in with your Jellyfin account.</li>
+      </ol>
+    </div>
+
+    <div class="ios">
+      <p class="lead">Hevyfin is an Android app, so it can't be installed on an iPhone or iPad. Open this address on a computer to watch in the browser.</p>
+    </div>
+
+    <p class="other">On a computer? <a href="../?web=1">Open the web version</a></p>
+  </main>
+  <script>
+    var ua = navigator.userAgent;
+    if (/iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)) {
+      document.body.classList.add('is-ios');
+    }
+    // apk/latest.json ({file, version, size, published}) sits next to the APK on your server
+    // (docs/self-hosting-web.md). Without it the button links to the GitHub releases.
+    fetch('../apk/latest.json', { cache: 'no-store' })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (j) {
+        var a = document.getElementById('download');
+        a.href = '../apk/' + encodeURIComponent(j.file);
+        a.setAttribute('download', j.file);
+        a.removeAttribute('aria-disabled');
+        var mb = (j.size / 1048576).toFixed(0);
+        var day = j.published ? new Date(j.published).toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+        document.getElementById('meta').textContent = 'Version ' + j.version + ' · ' + mb + ' MB' + (day ? ' · ' + day : '');
+      })
+      .catch(function () {
+        var a = document.getElementById('download');
+        a.href = 'https://github.com/NickHemeryckeHevan/hevyfin/releases/latest';
+        a.removeAttribute('aria-disabled');
+        document.getElementById('meta').textContent = 'Get the newest APK from the GitHub releases.';
+      });
+  </script>
+</body>
+</html>

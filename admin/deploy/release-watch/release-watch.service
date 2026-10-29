@@ -1,0 +1,8 @@
+[Unit]
+Description=Look on the indexers for releases you're waiting on (listed in Hevyfin Admin)
+
+[Service]
+Type=oneshot
+# PROWLARR_URL and PROWLARR_KEY (and optionally RELEASE_WATCH_*): see release-watch.py.
+EnvironmentFile=/etc/release-watch.env
+ExecStart=/usr/local/sbin/release-watch.py

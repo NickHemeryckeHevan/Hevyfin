@@ -1,0 +1,12 @@
+{
+ "watches": [
+  {
+   "id": "example-show-remaster",
+   "name": "Example Show, the remastered release",
+   "query": "Example Show",
+   "match": "^example[ ._-]*show\\b.*\\bremaster(ed)?\\b",
+   "exclude": "\\bsample\\b",
+   "hint": "Only list releases you are allowed to download (for example ones you own or that are freely licensed)."
+  }
+ ]
+}

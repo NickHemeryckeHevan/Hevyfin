@@ -1,0 +1,10 @@
+[Unit]
+Description=Daily release watch
+
+[Timer]
+OnCalendar=*-*-* 06:20
+RandomizedDelaySec=20m
+Persistent=true
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,53 @@
+{
+  "_comment": "An example for universes.py. Every TMDb id here (1, 2, 3, 900, 901) is a PLACEHOLDER: put in the real ids from themoviedb.org. Keys starting with _ are comments. See docs/custom-collections.md.",
+  "universes": [
+    {
+      "name": "Example Saga",
+      "_wikidata": "Optional: the Wikidata item(s) of the series, e.g. \"Q12345\" or [\"Q1\", \"Q2\"]. New entries found there are added after the story. Leave it out to use only the story list below.",
+      "wikidata": [],
+      "groups": {
+        "Part One": ["movie:1", "tv:2"],
+        "Part Two": ["movie:3"]
+      },
+      "latest": "Part Two",
+      "story": [
+        {
+          "kind": "movie", "tmdb": 1, "title": "Example Saga: The Beginning"
+        },
+        {
+          "_comment": "One season of a series as its own stop.",
+          "kind": "tv", "tmdb": 2, "title": "Example Saga: The Series",
+          "season": 1, "stop_title": "The First Winter",
+          "previously": "In The Beginning, the twins found the map and lost their home."
+        },
+        {
+          "_comment": "A hand-picked cut of episodes, with its own poster (from ART_DIR) and its own chapter.",
+          "kind": "tv", "tmdb": 2, "title": "Example Saga: The Series",
+          "episodes": [[2, 1], [2, 2]], "stop_title": "The Lost Map",
+          "art": "example-saga-the-lost-map.jpg", "group": "Side Stories",
+          "previously": "The First Winter ended with the map stolen from the twins' camp."
+        },
+        {
+          "kind": "movie", "tmdb": 3, "title": "Example Saga: The Return"
+        }
+      ],
+      "mini": [2],
+      "previously": {
+        "Example Saga: The Return": "The twins got the map back in The Lost Map. Now they head home."
+      },
+      "scenes": {
+        "_comment": "Film TMDb id -> its credits scenes, in seconds of the file they were measured on (credits-scenes.py).",
+        "1": {
+          "runtime": 6012.4, "credits": 5710,
+          "scenes": [
+            {"start": 5788, "end": 5850.5, "kind": "mid"},
+            {"start": 5960, "end": 6012.4, "kind": "post", "spoiler": true}
+          ]
+        }
+      },
+      "skip": ["movie:900"],
+      "skip_titles": ["Example Saga: Behind the Scenes"],
+      "drop": ["movie:901"]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+[Unit]
+Description=Hevyfin web (browser version + phone APK) on :8090
+After=network-online.target
+
+[Container]
+ContainerName=hevyfin-web
+Image=docker.io/library/nginx:stable
+AutoUpdate=registry
+# Host networking: it passes requests on to Jellyfin and Seerr (JELLYFIN_UPSTREAM, SEERR_UPSTREAM).
+Network=host
+Volume=/srv/hevyfin-web/nginx.conf:/etc/nginx/conf.d/default.conf:ro,z
+Volume=/srv/hevyfin-web/site:/srv/site:ro,z
+Volume=/srv/hevyfin-web/apk:/srv/apk:ro,z
+# The Vue browser version (browser/scripts/deploy.sh), served under /next/.
+Volume=/srv/hevyfin-web/next:/srv/next:ro,z
+
+[Service]
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

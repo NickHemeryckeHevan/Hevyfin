@@ -1,0 +1,21 @@
+[Unit]
+Description=Hevyfin Admin (accounts, requests, who's watching, server health) on :8067
+
+[Container]
+ContainerName=hevyfin-admin
+Image=localhost/hevyfin-admin:VERSION
+# Reach services on the host as host.containers.internal (see app.env). To reach other
+# containers by name instead, put it on their network: Network=<your network>.
+PublishPort=8067:8000
+EnvironmentFile=/srv/hevyfin-admin/app.env
+# What release-watch (an optional host timer) has found; see deploy/release-watch/.
+Volume=/srv/hevyfin-admin/watch:/app/watch:ro,Z
+# Environment=TZ=Europe/Amsterdam
+HealthCmd=python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=5)"
+
+[Service]
+Restart=on-failure
+TimeoutStartSec=300
+
+[Install]
+WantedBy=multi-user.target

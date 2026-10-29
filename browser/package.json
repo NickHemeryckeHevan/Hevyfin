@@ -1,0 +1,24 @@
+{
+  "name": "hevyfin-browser",
+  "version": "1.0.0",
+  "license": "GPL-3.0-or-later",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && node scripts/budget.js",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@fontsource/inter-tight": "^5.2.5",
+    "blurhash": "^2.0.5",
+    "hls.js": "^1.6.13",
+    "vue": "^3.5.44",
+    "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.4",
+    "vite": "^6.4.5",
+    "vitest": "^3.2.4"
+  }
+}
