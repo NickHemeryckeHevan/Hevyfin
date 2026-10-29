@@ -199,7 +199,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 ],
                 section('ABOUT'),
                 const Text(
-                  'Hevyfin $appVersion · a free Jellyfin + Seerr client (GPL-3.0) · github.com/NickHemeryckeHevan/hevyfin',
+                  'Hevyfin $appVersion · a free Jellyfin + Seerr client (GPL-3.0) · github.com/NickHemeryckeHevan/Hevyfin',
                   style: TextStyle(color: Hy.textMute),
                 ),
               ],

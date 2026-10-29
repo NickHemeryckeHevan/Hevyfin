@@ -81,7 +81,7 @@ async function seerrLogin() {
       </form>
     </section>
 
-    <p class="mute small">Hevyfin for the browser {{ VERSION }} · a free Jellyfin + Seerr client (GPL-3.0) · <a href="https://github.com/NickHemeryckeHevan/hevyfin" target="_blank" rel="noopener">source</a></p>
+    <p class="mute small">Hevyfin for the browser {{ VERSION }} · a free Jellyfin + Seerr client (GPL-3.0) · <a href="https://github.com/NickHemeryckeHevan/Hevyfin" target="_blank" rel="noopener">source</a></p>
   </main>
 </template>
 

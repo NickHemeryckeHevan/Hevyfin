@@ -31,7 +31,7 @@ flutter doctor --android-licenses     # accept them all with y
 ## 2. Get the code (once)
 
 ```sh
-git clone https://github.com/NickHemeryckeHevan/hevyfin.git
+git clone https://github.com/NickHemeryckeHevan/Hevyfin.git
 cd hevyfin
 flutter pub get
 flutter test            # optional: checks everything works (no server needed)
