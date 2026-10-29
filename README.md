@@ -42,6 +42,7 @@ app at 1080p and the browser version.</sub>
 | **Linux** (x86_64) | ✅ Supported: built and used daily on Fedora / Bazzite. Needs libmpv (the install script bundles it). |
 | **Android** phones and tablets (arm64) | ✅ Supported |
 | **Android TV / Google TV** (e.g. Chromecast with Google TV) | ✅ Supported: remote-friendly TV layout, Cinema, channels, screensaver |
+| **Amazon Fire TV** (Fire TV Stick 4K / 4K Max, Cube) | 🧪 Should work, not tested yet: same TV app, use the 32-bit APK. See [installing on a Fire TV](docs/building.md#put-it-on-an-amazon-fire-tv-fire-tv-stick-4k-4k-max-fire-tv-cube). Reports welcome! |
 | **Web**, desktop Firefox and Chrome | ✅ Supported, self-hosted (Flutter web build, or the lighter Vue browser version). Phones get a page to download the Android app. |
 | **Windows** | ⚠️ Not yet: the project files are there but it has never been built or tested. Help welcome! |
 | **macOS, iOS** | ❌ Not supported |

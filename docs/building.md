@@ -68,8 +68,11 @@ flutter build apk --release --split-per-abi
 ```
 
 This makes a few APK files in `build/app/outputs/flutter-apk/`. Almost every phone, tablet and
-TV from the last years needs **`app-arm64-v8a-release.apk`**. (Very old or cheap devices may need
-`app-armeabi-v7a-release.apk`.)
+TV from the last years needs **`app-arm64-v8a-release.apk`**. Very old or cheap devices, and
+**Amazon Fire TV** sticks (they run a 32-bit system, even the 4K Max), need
+**`app-armeabi-v7a-release.apk`**. Not sure? With the device connected (see below),
+`adb shell getprop ro.product.cpu.abilist` lists what it runs: `arm64-v8a` first means the
+arm64 APK, only `armeabi-v7a` means the other one.
 
 ### Put it on a phone or tablet
 
@@ -97,6 +100,46 @@ TV from the last years needs **`app-arm64-v8a-release.apk`**. (Very old or cheap
 
 Hevyfin then shows up in the TV's apps row. Sign in with the code shown on screen from Hevyfin on
 your phone (Settings → Sign in a TV) or from Jellyfin (Quick Connect), or with your password.
+
+### Put it on an Amazon Fire TV (Fire TV Stick, 4K, 4K Max, Fire TV Cube)
+
+> Fire TV hasn't been tested yet, but it should work: Fire OS is Android underneath, Hevyfin
+> switches to its TV layout there, and it needs no Google services. Only the "Watch Next" row on
+> the Google TV home screen doesn't exist on Fire TV, so Hevyfin doesn't show up there.
+> Please [tell us](https://github.com/NickHemeryckeHevan/Hevyfin/issues) how it runs.
+
+Use **`app-armeabi-v7a-release.apk`** (Fire TV runs a 32-bit system).
+
+1. **Switch on developer options.** Settings → My Fire TV → About → click the device's name
+   (e.g. *Fire TV Stick 4K Max*) 7 times until it says you're a developer. Go back: there's now
+   a *Developer options* entry under My Fire TV.
+2. In Settings → My Fire TV → **Developer options**, switch on **ADB debugging** (and, for the
+   Downloader way below, *Apps from unknown sources* / *Install unknown apps* for Downloader).
+3. Find the Fire TV's IP address: Settings → My Fire TV → About → **Network**.
+4. Install it, one of two ways:
+   - **From your computer with adb** (same network):
+     ```sh
+     adb connect 192.168.1.60:5555          # your Fire TV's address
+     adb install -r build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
+     ```
+     The Fire TV asks once to allow your computer: tick *Always allow* and choose OK.
+   - **Without adb, with the Downloader app**: install *Downloader* from the Amazon Appstore.
+     On your computer, share the APK folder on your network:
+     ```sh
+     cd build/app/outputs/flutter-apk && python3 -m http.server 8000
+     ```
+     In Downloader, enter `http://<your computer's IP>:8000/app-armeabi-v7a-release.apk`,
+     download it and choose *Install*. (If you host the web version, you can also put the APK
+     in its `/apk/` folder and open that address instead.) Stop the server with Ctrl+C afterwards.
+5. Hevyfin is in **Your Apps & Channels** (the ⋯ tile on the home screen). Long-press OK on it
+   (or press ☰) → *Move* to put it on the home row.
+
+Sign in as on any TV: with the code from Hevyfin on your phone (Settings → Sign in a TV),
+Jellyfin's Quick Connect, or your password. The Fire TV remote works as is: the circle moves
+around, the middle button is OK, ⟲ is Back.
+
+To update later, build again and repeat step 4 (`adb install -r` keeps your sign-in). If adb
+can't connect anymore, the Fire TV may have a new IP address: check step 3 again.
 
 ### Updates and your signing key
 
