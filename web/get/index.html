@@ -63,7 +63,7 @@
       document.body.classList.add('is-ios');
     }
     // apk/latest.json ({file, version, size, published}) sits next to the APK on your server
-    // (docs/self-hosting-web.md). Without it the button links to the GitHub releases.
+    // (docs/self-hosting-web.md). Without it the page says there's no APK here yet.
     fetch('../apk/latest.json', { cache: 'no-store' })
       .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(function (j) {
@@ -76,10 +76,7 @@
         document.getElementById('meta').textContent = 'Version ' + j.version + ' · ' + mb + ' MB' + (day ? ' · ' + day : '');
       })
       .catch(function () {
-        var a = document.getElementById('download');
-        a.href = 'https://github.com/NickHemeryckeHevan/hevyfin/releases/latest';
-        a.removeAttribute('aria-disabled');
-        document.getElementById('meta').textContent = 'Get the newest APK from the GitHub releases.';
+        document.getElementById('meta').textContent = 'There’s no app to download here yet. Ask whoever runs this server to build one (docs/building.md).';
       });
   </script>
 </body>

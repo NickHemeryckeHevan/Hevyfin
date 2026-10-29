@@ -58,8 +58,10 @@ or tracking.
 
 1. Have a [Jellyfin](https://jellyfin.org/downloads) server with your media (and, if you like,
    [Seerr](https://github.com/seerr-team/seerr) for requests).
-2. Get Hevyfin: an APK from the [releases](https://github.com/NickHemeryckeHevan/hevyfin/releases),
-   or build it yourself ([docs/building.md](docs/building.md)):
+2. **Build it yourself.** There are no ready-made downloads: you build the app from this
+   source, which takes about half an hour the first time.
+   **[docs/building.md](docs/building.md)** walks you through it step by step, from installing
+   Flutter to putting the app on your phone or TV:
    ```sh
    flutter pub get
    ./scripts/install-linux.sh                           # Linux

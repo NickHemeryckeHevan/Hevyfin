@@ -47,7 +47,8 @@ anyway). Put an APK and a `latest.json` next to it in `/srv/hevyfin-web/apk/`:
 {"file": "hevyfin-1.0.0-arm64-v8a.apk", "version": "1.0.0", "size": 41234567, "published": "2026-10-29"}
 ```
 
-Without `latest.json`, the button links to this project's GitHub releases.
+Build the APK yourself ([building.md](building.md#android-phones-tablets-and-tv)). Without `latest.json`, the page says there's no app
+to download yet.
 
 ## Keep it private
 
