@@ -846,8 +846,20 @@ abstract final class TvRemote {
     _listening = true;
     HardwareKeyboard.instance.addHandler((e) {
       if (e is KeyDownEvent) lastKey = DateTime.now();
-      return false;
+      return _keyboard(e);
     });
+  }
+
+  /// OK on a text field opens the on-screen keyboard. Flutter only does that on a tap, so on
+  /// the TV it stayed shut and typing needed the Google Home app. While the keyboard is up it
+  /// gets the remote's keys itself, so this only sees OK when it's closed.
+  static bool _keyboard(KeyEvent e) {
+    final k = e.logicalKey;
+    if (k != LogicalKeyboardKey.select && k != LogicalKeyboardKey.gameButtonA) return false;
+    final field = FocusManager.instance.primaryFocus?.context?.findAncestorStateOfType<EditableTextState>();
+    if (field == null) return false;
+    if (e is KeyDownEvent) field.requestKeyboard();
+    return true;
   }
 
   /// No key since the page opened (the press that opened it comes just before).

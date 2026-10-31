@@ -20,6 +20,7 @@ import 'theme.dart';
 import 'ui/pages/login.dart';
 import 'ui/pages/profiles.dart';
 import 'ui/pages/tv_login.dart';
+import 'ui/widgets/common.dart' show TvRemote;
 import 'ui/widgets/intro.dart';
 import 'ui/widgets/screensaver.dart';
 import 'host.dart';
@@ -31,6 +32,8 @@ Future<void> main() async {
   await Device.init();
   // Remotes are keys, not touch: always show what is selected (Android starts in touch mode).
   if (Device.isTv) FocusManager.instance.highlightStrategy = FocusHighlightStrategy.alwaysTraditional;
+  // From the start, so OK opens the keyboard on the sign-in page too.
+  if (Device.isTv) TvRemote.listen();
   // TVs have little memory: keep fewer decoded images around.
   if (Device.isTv) PaintingBinding.instance.imageCache.maximumSizeBytes = 120 << 20;
   if (const bool.fromEnvironment('PERF')) {
