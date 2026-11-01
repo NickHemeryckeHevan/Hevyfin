@@ -15,6 +15,7 @@ import '../../state/device.dart';
 import '../../theme.dart';
 import 'billboard.dart' show prewarmPlay;
 import 'spotlight.dart';
+import 'tv_keyboard.dart';
 
 JellyfinClient jf(BuildContext context) => context.read<AppState>().client!;
 
@@ -850,15 +851,20 @@ abstract final class TvRemote {
     });
   }
 
-  /// OK on a text field opens the on-screen keyboard. Flutter only does that on a tap, so on
-  /// the TV it stayed shut and typing needed the Google Home app. While the keyboard is up it
-  /// gets the remote's keys itself, so this only sees OK when it's closed.
+  /// OK on a text field opens Hevyfin's own on-screen keyboard (see [TvKeyboard]). Up and down
+  /// leave a one-line field on every page, not only inside the shell (the sign-in form too).
   static bool _keyboard(KeyEvent e) {
     final k = e.logicalKey;
-    if (k != LogicalKeyboardKey.select && k != LogicalKeyboardKey.gameButtonA) return false;
-    final field = FocusManager.instance.primaryFocus?.context?.findAncestorStateOfType<EditableTextState>();
-    if (field == null) return false;
-    if (e is KeyDownEvent) field.requestKeyboard();
+    final ok = k == LogicalKeyboardKey.select || k == LogicalKeyboardKey.gameButtonA;
+    final updown = k == LogicalKeyboardKey.arrowUp || k == LogicalKeyboardKey.arrowDown;
+    if (!ok && !updown) return false;
+    final node = FocusManager.instance.primaryFocus;
+    final field = node?.context?.findAncestorStateOfType<EditableTextState>();
+    if (field == null || (updown && field.widget.maxLines != 1)) return false;
+    if (e is! KeyUpEvent) {
+      if (ok && e is KeyDownEvent) TvKeyboard.open(field);
+      if (updown) node!.focusInDirection(k == LogicalKeyboardKey.arrowUp ? TraversalDirection.up : TraversalDirection.down);
+    }
     return true;
   }
 
