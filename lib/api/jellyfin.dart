@@ -1046,7 +1046,10 @@ class JellyfinClient {
       {'Format': 'srt', 'Method': 'External'},
       {'Format': 'ass', 'Method': 'External'},
       {'Format': 'vtt', 'Method': 'External'},
-      {'Format': 'pgssub', 'Method': 'Encode'},
+      // mpv draws picture subtitles itself. With "Encode" here, a film whose default subtitle
+      // is PGS was burnt in and transcoded at about twice the file's bitrate, which stuttered
+      // on a slower connection. A capped transcode still burns them in (Jellyfin's fallback).
+      for (final f in ['pgssub', 'dvdsub', 'dvbsub']) {'Format': f, 'Method': 'Embed'},
     ],
   };
 
